@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 import models
 
+#is the code runiing or start google meeet
 
 
 class BaseModel:

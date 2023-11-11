@@ -2,8 +2,9 @@
 """Definition of the BaseModel class."""
 import uuid
 from datetime import datetime
-import models
+from  models.engine.file_storage import FileStorage
 
+#is the code runiing or start google meeet
 
 
 class BaseModel:
@@ -29,7 +30,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = value
         else:
-            models.storage.new(self)
+            FileStorage.new(self)
 
     # public instance methods
     def save(self):
