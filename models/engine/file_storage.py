@@ -1,9 +1,6 @@
-#!usr/bin/python3
 """Definition of the BaseModel class."""
 import json
 from models.base_model import BaseModel
-
-
 
 class FileStorage:
     """Serializes instances to a JSON file \
@@ -21,7 +18,7 @@ class FileStorage:
     # public instance methods
     def all(self):
         """Returns the dictionary __objects"""
-        return (FileStorage.__objects)
+        return FileStorage.__objects
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id"""
@@ -46,6 +43,9 @@ class FileStorage:
                 for obj in objects_dict.values():
                     class_name = obj["__class__"]
                     del obj["__class__"]
-                    self.new(eval(class_name)(**obj))
+                    # Use globals() to access classes dynamically
+                    class_instance = globals().get(class_name)
+                    if class_instance:
+                        self.new(class_instance(**obj))
         except FileNotFoundError:
             return
